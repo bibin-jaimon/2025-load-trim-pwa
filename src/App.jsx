@@ -6,6 +6,7 @@ function App() {
     <div className="app-container">
       <h1>Load And Trim</h1>
       <Table />
+      <h1>Trim Sheet</h1>
     </div>
   );
 }

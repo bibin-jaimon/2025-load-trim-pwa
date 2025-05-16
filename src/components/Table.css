@@ -1,7 +1,7 @@
 .table-container {
   padding: 12px;
   width: 100%;
-  height: 100vh;
+  min-height: fit-content;
   margin: 0;
   -webkit-overflow-scrolling: touch;
   display: flex;
@@ -48,9 +48,7 @@
   border-radius: 12px;
   overflow: hidden;
   font-size: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 0;
 }
 
 .data-table thead {
@@ -58,8 +56,8 @@
 }
 
 .data-table tbody {
-  flex: 1;
-  overflow-y: auto;
+  display: table;
+  width: 100%;
 }
 
 .data-table th,
@@ -149,9 +147,7 @@
 @media screen and (max-width: 768px) {
   .table-container {
     padding: 8px;
-    height: calc(
-      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-    );
+    min-height: auto;
   }
 
   .vtsha-dropdown {
@@ -181,7 +177,6 @@
     padding: 8px 0;
   }
 
-  .data-table th,
   .data-table td {
     display: block;
     width: 100%;
@@ -203,12 +198,6 @@
     background-color: #f8f9fa;
     font-weight: 600;
     border-bottom: none;
-  }
-
-  .data-table td {
-    padding-left: 50%;
-    padding-right: 12px;
-    background-color: white;
   }
 
   .data-table td:before {
