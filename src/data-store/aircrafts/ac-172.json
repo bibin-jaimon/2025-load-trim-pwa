@@ -2,16 +2,16 @@
   "type": "Cessna 172",
   "regns": [
     {
-      "acregn": "VT-SHA",
-      "bew": 539.86,
-      "arm": 30.21,
-      "mtow": 758.18,
+      "acreg": "variant 1",
+      "bew": 22.86,
+      "arm": 33.21,
+      "mtow": 33.18,
       "mlw": 758.18
     },
     {
-      "acreg": "VT-SHC",
-      "bew": 543.33,
-      "arm": 30.21,
+      "acreg": "variant2",
+      "bew": 444.33,
+      "arm": 33.21,
       "mtow": 758.18,
       "mlw": 758.18
     }

@@ -17,7 +17,6 @@ export const loadPressures = async () => {
 
 const mapped = (data) => {
   let mapped = data.map((item) => {
-    console.log("mapped", item.default);
     return item.default;
   });
   return mapped;

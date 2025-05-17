@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Table from "./components/Table";
+import Table from "./components/reference-table/Table";
 import { loadAircrafts, loadPressures } from "./data-store";
+import TitleWithSelector from "./components/selector/selector-with-title";
 
 function App() {
   const [pressures, setPressures] = useState([]);
-  const [aircrafts, setAircrafts] = useState({});
+  const [aircrafts, setAircrafts] = useState([]);
+
+  const [selectedAircraft, setSelectedAircraft] = useState();
 
   useEffect(() => {
     fetchAircrafts();
@@ -22,10 +25,21 @@ function App() {
     setAircrafts(data);
   };
 
+  useEffect(() => {
+    setSelectedAircraft(aircrafts[0]);
+  }, [aircrafts]);
+
   return (
     <div className="app-container">
-      <h1>Load And Trim</h1>
-      <Table />
+      <h1>Load And Trim [{selectedAircraft?.type}]</h1>
+      <TitleWithSelector
+        title="Aircraft"
+        displayKey="type"
+        options={aircrafts}
+        value={selectedAircraft?.type}
+        onChange={setSelectedAircraft}
+      />
+      {selectedAircraft && <Table aircraft={selectedAircraft} />}
       <h1>Trim Sheet</h1>
     </div>
   );
