@@ -1,0 +1,1 @@
+const a="Cessna 172",t=[{acreg:"variant 1",bew:22.86,arm:33.21,mtow:33.18,mlw:758.18},{acreg:"variant2",bew:444.33,arm:33.21,mtow:758.18,mlw:758.18}],e={type:a,regns:t};export{e as default,t as regns,a as type};
