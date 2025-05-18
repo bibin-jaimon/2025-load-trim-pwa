@@ -102,6 +102,12 @@ function App() {
         <ReferenceTable aircraft={selectedAircraft} variant={selectedVariant} />
       )}
       <h1>Trim Sheet</h1>
+      <button
+        onClick={() => window.location.reload()}
+        style={{ margin: "10px" }}
+      >
+        🔄 Reload App
+      </button>
     </div>
   );
 }
