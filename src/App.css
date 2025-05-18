@@ -64,7 +64,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background-color: #c11818;
+  background-color: #d7a0ce;
 }
 
 h1 {
@@ -82,7 +82,7 @@ h1 {
 /* Mobile-specific styles */
 @media screen and (max-width: 768px) {
   h1 {
-    font-size: 20px;
+    font-size: 16px;
     padding: 12px;
   }
 }

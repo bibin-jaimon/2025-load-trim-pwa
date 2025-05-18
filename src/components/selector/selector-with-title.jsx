@@ -8,11 +8,11 @@ const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
         justifyContent: "space-between",
         alignItems: "space-between",
         padding: "8px 16px",
-        background: "red",
+        background: "#d7a0ce",
       }}
     >
       <h2 style={{ margin: 0, flex: 1 }}>{title}</h2>
-      <select
+      <select 
         value={value}
         onChange={(e) => {
           let selectedItem = options.filter(

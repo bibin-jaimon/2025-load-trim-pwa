@@ -58,7 +58,7 @@ function App() {
   return (
     <div
       style={{
-        background: "green",
+        background: "#d7a0ce",
         maxWidth: "100%",
         width: "100%",
       }}
