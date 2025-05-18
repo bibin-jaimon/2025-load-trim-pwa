@@ -65,7 +65,7 @@ const createTrimSheetData = ({
 
   return {
     columns: [
-      { key: "no", label: "Sl. No" },
+      { key: "no", label: "No" },
       { key: "itemDescription", label: "Item Description" },
       { key: "weight", label: "Weight (kg)" },
       { key: "arm", label: "Arm (in)" },
@@ -82,7 +82,7 @@ function App() {
   const [selectedAircraft, setSelectedAircraft] = useState();
   const [selectedVariant, setSelectedVariant] = useState();
   const [selectedPressure, setSelectedPressure] = useState();
-  const [fuel, setFuel] = useState(0);
+  const [fuel, setFuel] = useState(1);
 
   const [pilotWeight, setPilotWeight] = useState(() => 75);
   const [coPilotWeight, setCoPilotWeight] = useState(() => 75);
@@ -210,9 +210,9 @@ function App() {
         value: coPilotWeight,
         onChange: setCoPilotWeight,
       })}
-
+      <h1>Trim Sheet</h1>
       {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
-
+      <h1>Reference Table</h1>
       {canShow && (
         <ReferenceTable
           aircraft={selectedAircraft}
@@ -221,7 +221,6 @@ function App() {
           fuel={`${convertLtoGas(fuel)}`}
         />
       )}
-      <h1>Trim Sheet</h1>
       <button
         onClick={() => window.location.reload()}
         style={{ margin: "10px" }}

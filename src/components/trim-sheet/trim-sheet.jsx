@@ -1,21 +1,34 @@
 import React from "react";
+import "./trim-sheet.css";
 
 const TrimSheet = ({ data }) => {
   const { columns, rows } = data;
 
   return (
-    <div style={{ overflowX: "auto", width: "100%" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+    <div
+      className="table-container"
+      style={{ overflowX: "auto", width: "100%" }}
+    >
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          fontFamily: "Arial, sans-serif",
+          minWidth: "500px",
+        }}
+      >
         <thead>
           <tr>
             {columns.map((col) => (
               <th
                 key={col.key}
                 style={{
-                  borderBottom: "2px solid #ccc",
+                  border: "1px solid #ccc",
+                  backgroundColor: "#e0e0e0",
                   textAlign: "left",
-                  padding: "8px",
-                  background: "#f9f9f9",
+                  padding: "10px",
+                  fontWeight: "bold",
+                  fontSize: "14px",
                 }}
               >
                 {col.label}
@@ -25,13 +38,19 @@ const TrimSheet = ({ data }) => {
         </thead>
         <tbody>
           {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr
+              key={rowIndex}
+              style={{
+                backgroundColor: rowIndex % 2 === 0 ? "#fff" : "#f9f9f9",
+              }}
+            >
               {columns.map((col) => (
                 <td
                   key={col.key}
                   style={{
-                    padding: "8px",
-                    borderBottom: "1px solid #eee",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    fontSize: "14px",
                   }}
                 >
                   {row[col.key]}
