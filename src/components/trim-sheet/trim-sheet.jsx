@@ -15,6 +15,7 @@ const TrimSheet = ({ data }) => {
           borderCollapse: "collapse",
           fontFamily: "Arial, sans-serif",
           minWidth: "500px",
+          color: "black", // set default font color
         }}
       >
         <thead>
@@ -29,6 +30,7 @@ const TrimSheet = ({ data }) => {
                   padding: "10px",
                   fontWeight: "bold",
                   fontSize: "14px",
+                  color: "black", // explicitly set black font
                 }}
               >
                 {col.label}
@@ -51,6 +53,7 @@ const TrimSheet = ({ data }) => {
                     border: "1px solid #ccc",
                     padding: "10px",
                     fontSize: "14px",
+                    color: "black", // explicitly set black font
                   }}
                 >
                   {row[col.key]}
