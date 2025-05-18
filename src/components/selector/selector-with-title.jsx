@@ -11,7 +11,7 @@ const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
         background: "#d7a0ce",
       }}
     >
-      <h2 style={{ margin: 0, flex: 1 }}>{title}</h2>
+      <h2 style={{ margin: 0, flex: 1, color: "black" }}>{title}</h2>
       <select
         value={value}
         onChange={(e) => {
@@ -24,7 +24,7 @@ const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
 
           onChange(selectedItem[0]);
         }}
-        style={{ padding: "4px 8px" }}
+        style={{ padding: "4px 8px", backgroundColor: "white", color: "black" }}
       >
         {options.map((opt) => (
           <option key={opt[displayKey]} value={opt[displayKey]}>

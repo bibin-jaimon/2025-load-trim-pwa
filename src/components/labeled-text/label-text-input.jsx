@@ -21,7 +21,7 @@ const LabeledTextInput = ({ label, value, onChange }) => {
         boxSizing: "border-box",
       }}
     >
-      <h2 style={{ margin: 0, flex: 1 }}>{label}</h2>
+      <h2 style={{ margin: 0, flex: 1, color: "black" }}>{label}</h2>
       <input
         type="number"
         inputMode="decimal"
@@ -35,6 +35,8 @@ const LabeledTextInput = ({ label, value, onChange }) => {
           borderRadius: "8px",
           border: "1px solid #ccc",
           width: "100%",
+          color: "black",
+          backgroundColor: "white"
         }}
       />
     </div>
