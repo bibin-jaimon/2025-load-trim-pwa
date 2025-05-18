@@ -98,8 +98,12 @@ function App() {
           onChange={setSelectedVariant}
         />
       )}
-      {selectedVariant && (
-        <ReferenceTable aircraft={selectedAircraft} variant={selectedVariant} />
+      {canShow && (
+        <ReferenceTable
+          aircraft={selectedAircraft}
+          variant={selectedVariant}
+          pressure={selectedPressure}
+        />
       )}
       <h1>Trim Sheet</h1>
       <button
