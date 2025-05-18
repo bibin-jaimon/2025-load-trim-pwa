@@ -10,10 +10,18 @@ function App() {
 
   const [selectedAircraft, setSelectedAircraft] = useState();
   const [selectedVariant, setSelectedVariant] = useState();
+  const [selectedPressure, setSelectedPressure] = useState();
+
   useEffect(() => {
     fetchAircrafts();
     fetchPressures();
   }, []);
+
+  // set initial pressure
+  useEffect(() => {
+    console.log(pressures);
+    setSelectedPressure(pressures?.[0]);
+  }, [pressures]);
 
   // fetch all pressures
   const fetchPressures = async () => {
@@ -27,15 +35,25 @@ function App() {
     setAircrafts(data);
   };
 
-
   // set initial aircraft
   useEffect(() => {
     setSelectedAircraft(aircrafts[0]);
   }, [aircrafts]);
 
+  // set selected aircrafts first variant
   useEffect(() => {
-    setSelectedVariant(selectedAircraft?.regns?.[0])
+    setSelectedVariant(selectedAircraft?.regns?.[0]);
   }, [selectedAircraft]);
+
+  const canShow =
+    selectedPressure != undefined &&
+    selectedAircraft != undefined &&
+    selectedVariant != undefined;
+
+  if (canShow == false) {
+    console.log({ selectedPressure, selectedAircraft, selectedVariant });
+    return <h1>Not loaded</h1>;
+  }
 
   return (
     <div
@@ -46,16 +64,32 @@ function App() {
       }}
       className="app-container"
     >
-      <h1>Load And Trim [{selectedAircraft?.type}]</h1>
-      <TitleWithSelector
-        title="Aircraft"
-        displayKey="type"
-        options={aircrafts}
-        value={selectedAircraft?.type}
-        onChange={setSelectedAircraft}
-      />
+      <h1>
+        Load And Trim {`${canShow}`} - {selectedAircraft?.type} -
+        {selectedPressure?.value}
+      </h1>
 
-      {selectedAircraft && (
+      {canShow && (
+        <TitleWithSelector
+          title="Pressure"
+          displayKey="key"
+          options={pressures}
+          value={selectedPressure?.key}
+          onChange={setSelectedPressure}
+        />
+      )}
+
+      {canShow && (
+        <TitleWithSelector
+          title="Aircraft"
+          displayKey="type"
+          options={aircrafts}
+          value={selectedAircraft?.type}
+          onChange={setSelectedAircraft}
+        />
+      )}
+
+      {canShow && (
         <TitleWithSelector
           title={"Variant"}
           displayKey={"acreg"}
@@ -64,8 +98,9 @@ function App() {
           onChange={setSelectedVariant}
         />
       )}
-
-      {selectedVariant && <ReferenceTable aircraft={selectedAircraft} variant={selectedVariant} />}
+      {selectedVariant && (
+        <ReferenceTable aircraft={selectedAircraft} variant={selectedVariant} />
+      )}
       <h1>Trim Sheet</h1>
     </div>
   );

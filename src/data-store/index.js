@@ -12,7 +12,7 @@ export const loadAircrafts = async () => {
 export const loadPressures = async () => {
   const modules = import.meta.glob("./pressure/pressure.json");
   let data = await loadJSONModules(modules);
-  return mapped(data);
+  return mapped(data)[0].data;
 };
 
 const mapped = (data) => {
