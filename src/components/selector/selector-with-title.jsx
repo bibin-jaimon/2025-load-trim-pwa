@@ -12,7 +12,7 @@ const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
       }}
     >
       <h2 style={{ margin: 0, flex: 1 }}>{title}</h2>
-      <select 
+      <select
         value={value}
         onChange={(e) => {
           let selectedItem = options.filter(

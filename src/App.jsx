@@ -3,6 +3,10 @@ import "./App.css";
 import ReferenceTable from "./components/reference-table/Table";
 import { loadAircrafts, loadPressures } from "./data-store";
 import TitleWithSelector from "./components/selector/selector-with-title";
+import LabeledTextInput from "./components/labeled-text/label-text-input";
+import TrimSheet from "./components/trim-sheet/trim-sheet";
+
+const convertLtoGas = (val) => Number(val) * 0.72;
 
 function App() {
   const [pressures, setPressures] = useState([]);
@@ -11,6 +15,12 @@ function App() {
   const [selectedAircraft, setSelectedAircraft] = useState();
   const [selectedVariant, setSelectedVariant] = useState();
   const [selectedPressure, setSelectedPressure] = useState();
+  const [fuel, setFuel] = useState(() => 0);
+
+  const [pilotWeight, setPilotWeight] = useState(() => 75);
+  const [coPilotWeight, setCoPilotWeight] = useState(() => 75);
+
+  const [trimSheetData, setTrimSheetData] = useState();
 
   useEffect(() => {
     fetchAircrafts();
@@ -55,6 +65,10 @@ function App() {
     return <h1>Not loaded</h1>;
   }
 
+  const renderFuelTextField = ({ label, value, onChange }) => {
+    return <LabeledTextInput label={label} value={value} onChange={onChange} />;
+  };
+
   return (
     <div
       style={{
@@ -64,10 +78,7 @@ function App() {
       }}
       className="app-container"
     >
-      <h1>
-        Load And Trim {`${canShow}`} - {selectedAircraft?.type} -
-        {selectedPressure?.value}
-      </h1>
+      <h1>Load And Trim</h1>
 
       {canShow && (
         <TitleWithSelector
@@ -78,7 +89,6 @@ function App() {
           onChange={setSelectedPressure}
         />
       )}
-
       {canShow && (
         <TitleWithSelector
           title="Aircraft"
@@ -88,7 +98,6 @@ function App() {
           onChange={setSelectedAircraft}
         />
       )}
-
       {canShow && (
         <TitleWithSelector
           title={"Variant"}
@@ -98,11 +107,30 @@ function App() {
           onChange={setSelectedVariant}
         />
       )}
+      {renderFuelTextField({
+        label: "Fuel (L)",
+        value: fuel,
+        onChange: setFuel,
+      })}
+      {renderFuelTextField({
+        label: "Pilot",
+        value: pilotWeight,
+        onChange: setPilotWeight,
+      })}
+      {renderFuelTextField({
+        label: "Co-Pilot",
+        value: coPilotWeight,
+        onChange: setCoPilotWeight,
+      })}
+
+      {trimSheetData && <TrimSheet data={trimSheetData} />}
+
       {canShow && (
         <ReferenceTable
           aircraft={selectedAircraft}
           variant={selectedVariant}
           pressure={selectedPressure}
+          fuel={`${convertLtoGas(fuel)}`}
         />
       )}
       <h1>Trim Sheet</h1>
