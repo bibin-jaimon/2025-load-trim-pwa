@@ -8,6 +8,7 @@ const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
         justifyContent: "space-between",
         alignItems: "space-between",
         padding: "8px 16px",
+        background: "red"
       }}
     >
       <h2 style={{ margin: 0, flex: 1 }}>{title}</h2>

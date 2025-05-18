@@ -10,15 +10,15 @@ const COLUMNS = [
   { key: "mlw", label: "MLW(KGS" },
 ];
 
-const Table = ({ aircraft }) => {
-  const [selectedVariant, setSelectedVariant] = useState(aircraft?.regns?.[0]);
+const ReferenceTable = ({ aircraft, variant }) => {
 
-  useEffect(() => {
-    setSelectedVariant(aircraft?.regns?.[0]);
-  }, [aircraft]);
+  // useEffect(() => {
+  //   setSelectedVariant(variant);
+  // }, [variant]);
+
   return (
     <div className="table-container">
-      <div className="vtsha-selector">
+      {/* <div className="vtsha-selector">
         {aircraft && (
           <TitleWithSelector
             title={"Variant"}
@@ -28,14 +28,14 @@ const Table = ({ aircraft }) => {
             onChange={setSelectedVariant}
           />
         )}
-      </div>
+      </div> */}
 
       <table className="data-table">
         <tbody>
           <tr>
             {COLUMNS.map((column) => (
               <td key={column.key} data-label={column.label}>
-                {selectedVariant[column.key]}
+                {variant[column.key]}
               </td>
             ))}
           </tr>
@@ -45,4 +45,4 @@ const Table = ({ aircraft }) => {
   );
 };
 
-export default Table;
+export default ReferenceTable;
