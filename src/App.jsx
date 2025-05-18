@@ -59,7 +59,7 @@ const createTrimSheetData = ({
     no: 7,
     itemDescription: "Ramp Weight",
     arm: "", //rampArm.toFixed(2),
-    weight: totalWeight,
+    weight: totalWeight.toFixed(2),
     moment: totalMoment.toFixed(2),
   };
 
