@@ -5,6 +5,7 @@ import { loadAircrafts, loadPressures } from "./data-store";
 import TitleWithSelector from "./components/selector/selector-with-title";
 import LabeledTextInput from "./components/labeled-text/label-text-input";
 import TrimSheet from "./components/trim-sheet/trim-sheet";
+import RadioButtonGroup from "./components/radio-button";
 
 const convertLtoGas = (val) => Number(val) * 0.72;
 
@@ -14,6 +15,7 @@ const createTrimSheetData = ({
   fuel,
   pilotWeight,
   coPilotWeight,
+  mode,
 }) => {
   const initialRows = [
     {
@@ -37,14 +39,18 @@ const createTrimSheetData = ({
       weight: pilotWeight,
       moment: (Number(39) * Number(pilotWeight)).toFixed(2),
     },
-    {
+    
+  ];
+
+  if (mode == "Dual") {
+    initialRows.push({
       no: 4,
       itemDescription: "Co-Pilot",
       arm: 39,
       weight: coPilotWeight,
       moment: (Number(39) * Number(coPilotWeight)).toFixed(2),
-    },
-  ];
+    });
+  }
 
   const totalWeight = initialRows.reduce(
     (sum, row) => sum + Number(row.weight),
@@ -88,6 +94,7 @@ function App() {
   const [coPilotWeight, setCoPilotWeight] = useState(() => 75);
 
   const [trimSheetData, setTrimSheetData] = useState();
+  const [mode, setMode] = useState("Dual");
 
   useEffect(() => {
     const isValid =
@@ -105,10 +112,11 @@ function App() {
         fuel: convertLtoGas(fuel),
         pilotWeight,
         coPilotWeight,
+        mode,
       });
       setTrimSheetData(trimSheet);
     }
-  }, [selectedAircraft, selectedVariant, fuel, pilotWeight, coPilotWeight]);
+  }, [selectedAircraft, selectedVariant, fuel, pilotWeight, coPilotWeight, mode]);
 
   useEffect(() => {
     fetchAircrafts();
@@ -158,76 +166,83 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        background: "#d7a0ce",
-        maxWidth: "100%",
-        width: "100%",
-      }}
-      className="app-container"
-    >
-      <h1>Load And Trim</h1>
-
-      {canShow && (
-        <TitleWithSelector
-          title="Pressure"
-          displayKey="key"
-          options={pressures}
-          value={selectedPressure?.key}
-          onChange={setSelectedPressure}
-        />
-      )}
-      {canShow && (
-        <TitleWithSelector
-          title="Aircraft"
-          displayKey="type"
-          options={aircrafts}
-          value={selectedAircraft?.type}
-          onChange={setSelectedAircraft}
-        />
-      )}
-      {canShow && (
-        <TitleWithSelector
-          title={"Variant"}
-          displayKey={"acreg"}
-          options={selectedAircraft?.regns}
-          value={selectedVariant?.acreg}
-          onChange={setSelectedVariant}
-        />
-      )}
-      {renderFuelTextField({
-        label: "Fuel (L)",
-        value: fuel,
-        onChange: setFuel,
-      })}
-      {renderFuelTextField({
-        label: "Pilot",
-        value: pilotWeight,
-        onChange: setPilotWeight,
-      })}
-      {renderFuelTextField({
-        label: "Co-Pilot",
-        value: coPilotWeight,
-        onChange: setCoPilotWeight,
-      })}
-      <h1>Trim Sheet</h1>
-      {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
-      <h1>Reference Table</h1>
-      {canShow && (
-        <ReferenceTable
-          aircraft={selectedAircraft}
-          variant={selectedVariant}
-          pressure={selectedPressure}
-          fuel={`${convertLtoGas(fuel)}`}
-        />
-      )}
-      <button
-        onClick={() => window.location.reload()}
-        style={{ margin: "10px" }}
+    <>
+      <div
+        style={{
+          background: "#d7a0ce",
+          maxWidth: "100%",
+          width: "100%",
+        }}
+        className="app-container"
       >
-        🔄 Reload App
-      </button>
-    </div>
+        <h1>Load And Trim</h1>
+        <RadioButtonGroup
+          options={["Solo", "Dual"]}
+          value={mode}
+          onChange={setMode}
+        />
+        {canShow && (
+          <TitleWithSelector
+            title="Pressure"
+            displayKey="key"
+            options={pressures}
+            value={selectedPressure?.key}
+            onChange={setSelectedPressure}
+          />
+        )}
+        {canShow && (
+          <TitleWithSelector
+            title="Type"
+            displayKey="type"
+            options={aircrafts}
+            value={selectedAircraft?.type}
+            onChange={setSelectedAircraft}
+          />
+        )}
+        {canShow && (
+          <TitleWithSelector
+            title={"Aircraft"}
+            displayKey={"acreg"}
+            options={selectedAircraft?.regns}
+            value={selectedVariant?.acreg}
+            onChange={setSelectedVariant}
+          />
+        )}
+        {renderFuelTextField({
+          label: "Fuel (L)",
+          value: fuel,
+          onChange: setFuel,
+        })}
+        {renderFuelTextField({
+          label: "Pilot",
+          value: pilotWeight,
+          onChange: setPilotWeight,
+        })}
+        {mode == "Dual" &&
+          renderFuelTextField({
+            label: "Co-Pilot",
+            value: coPilotWeight,
+            onChange: setCoPilotWeight,
+          })}
+        <h1>Trim Sheet</h1>
+        {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
+        <h1>Reference Table</h1>
+        {canShow && (
+          <ReferenceTable
+            aircraft={selectedAircraft}
+            variant={selectedVariant}
+            pressure={selectedPressure}
+            fuel={`${convertLtoGas(fuel)}`}
+          />
+        )}
+        <button
+          onClick={() => window.location.reload()}
+          style={{ margin: "10px" }}
+        >
+          🔄 Reload App
+        </button>
+      </div>
+    </>
   );
 }
 
