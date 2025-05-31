@@ -63,6 +63,7 @@ const TrimSheet = ({ data }) => {
           ))}
         </tbody>
       </table>
+      <h1>CG: {data.cg}</h1>
     </div>
   );
 };

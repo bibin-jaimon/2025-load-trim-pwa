@@ -37,9 +37,8 @@ const createTrimSheetData = ({
       itemDescription: "Pilot",
       arm: 39,
       weight: pilotWeight,
-      moment: (Number(39) * Number(pilotWeight)).toFixed(2),
+      moment: (Number(39) * Number(pilotWeight)).toFixed(0),
     },
-    
   ];
 
   if (mode == "Dual") {
@@ -48,9 +47,17 @@ const createTrimSheetData = ({
       itemDescription: "Co-Pilot",
       arm: 39,
       weight: coPilotWeight,
-      moment: (Number(39) * Number(coPilotWeight)).toFixed(2),
+      moment: (Number(39) * Number(coPilotWeight)).toFixed(0),
     });
   }
+
+  const engineStartAndTaxiFuel = {
+    no: 8,
+    itemDescription: "Engine Start and Taxi Fuel",
+    arm: 40,
+    weight: 2.16,
+    moment: (Number(40) * Number(2.16)).toFixed(2),
+  };
 
   const totalWeight = initialRows.reduce(
     (sum, row) => sum + Number(row.weight),
@@ -69,6 +76,18 @@ const createTrimSheetData = ({
     moment: totalMoment.toFixed(2),
   };
 
+  const totalWeightAndMoment = {
+    no: 9,
+    itemDescription: "Total weight and moment",
+    arm: "",
+    weight: (
+      Number(totalWeight) - Number(engineStartAndTaxiFuel.weight)
+    ).toFixed(2),
+    moment: (
+      Number(totalMoment) - Number(engineStartAndTaxiFuel.moment)
+    ).toFixed(2),
+  };
+
   return {
     columns: [
       { key: "no", label: "No" },
@@ -77,7 +96,13 @@ const createTrimSheetData = ({
       { key: "arm", label: "Arm (in)" },
       { key: "moment", label: "Moment" },
     ],
-    rows: [...initialRows, rampWeightRow],
+    rows: [
+      ...initialRows,
+      rampWeightRow,
+      engineStartAndTaxiFuel,
+      totalWeightAndMoment,
+    ],
+    cg: (totalWeightAndMoment.moment / totalWeightAndMoment.weight).toFixed(2),
   };
 };
 
@@ -88,7 +113,7 @@ function App() {
   const [selectedAircraft, setSelectedAircraft] = useState();
   const [selectedVariant, setSelectedVariant] = useState();
   const [selectedPressure, setSelectedPressure] = useState();
-  const [fuel, setFuel] = useState(1);
+  const [fuel, setFuel] = useState(70);
 
   const [pilotWeight, setPilotWeight] = useState(() => 75);
   const [coPilotWeight, setCoPilotWeight] = useState(() => 75);
@@ -116,7 +141,14 @@ function App() {
       });
       setTrimSheetData(trimSheet);
     }
-  }, [selectedAircraft, selectedVariant, fuel, pilotWeight, coPilotWeight, mode]);
+  }, [
+    selectedAircraft,
+    selectedVariant,
+    fuel,
+    pilotWeight,
+    coPilotWeight,
+    mode,
+  ]);
 
   useEffect(() => {
     fetchAircrafts();
@@ -181,6 +213,8 @@ function App() {
           value={mode}
           onChange={setMode}
         />
+        <h1>Trim Sheet</h1>
+        {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
         {canShow && (
           <TitleWithSelector
             title="Pressure"
@@ -224,8 +258,7 @@ function App() {
             value: coPilotWeight,
             onChange: setCoPilotWeight,
           })}
-        <h1>Trim Sheet</h1>
-        {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
+
         <h1>Reference Table</h1>
         {canShow && (
           <ReferenceTable
