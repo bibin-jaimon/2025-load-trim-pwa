@@ -22,7 +22,7 @@ const styles = {
     flex: 1,
   },
   select: {
-    padding: "10px 12px",
+    padding: "16px 12px",
     fontSize: "16px",
     borderRadius: "8px",
     border: "1px solid #cbd5e1",
