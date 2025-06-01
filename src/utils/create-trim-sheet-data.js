@@ -40,6 +40,14 @@ const createTrimSheetData = ({
       weight: coPilotWeight,
       moment: (Number(39) * Number(coPilotWeight)).toFixed(0),
     });
+  } else {
+    initialRows.push({
+      no: 4,
+      itemDescription: "Co-Pilot",
+      arm: 39,
+      weight: "-",
+      moment: "-",
+    });
   }
 
   const baggageArea1 = {
@@ -58,14 +66,14 @@ const createTrimSheetData = ({
     moment: "-",
   };
 
-  const totalWeight = initialRows.reduce(
-    (sum, row) => sum + Number(row.weight),
-    0
-  );
-  const totalMoment = initialRows.reduce(
-    (sum, row) => sum + Number(row.moment),
-    0
-  );
+  const totalWeight = initialRows.reduce((sum, row) => {
+    let number = isNaN(Number(row.weight)) ? 0 : Number(row.weight);
+    return sum + number;
+  }, 0);
+  const totalMoment = initialRows.reduce((sum, row) => {
+    let number = isNaN(Number(row.moment)) ? 0 : Number(row.moment);
+    return sum + number;
+  }, 0);
 
   const rampWeightRow = {
     no: 7,
