@@ -10,7 +10,6 @@ const styles = {
     border: "1px solid #e2e8f0",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.03)",
     fontFamily: "'Inter', sans-serif",
-    maxWidth: maxWidth || "600px",
     margin: "0 auto",
     width: "100%",
     boxSizing: "border-box",
@@ -23,13 +22,14 @@ const styles = {
     flex: 1,
   },
   select: {
-    padding: "10px 14px",
+    padding: "10px 12px",
     fontSize: "16px",
     borderRadius: "8px",
     border: "1px solid #cbd5e1",
     backgroundColor: "#ffffff",
     color: "#1e293b",
     outline: "none",
+    width: "50px",
     transition: "border 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
     minWidth: "290px",
     maxWidth: "300px",
@@ -46,7 +46,7 @@ const TitleWithSelector = ({
   displayKey,
   value,
   onChange,
-  maxWidth, // optional: customize max width
+  maxWidth,
 }) => {
   const [focused, setFocused] = React.useState(false);
 
@@ -68,11 +68,13 @@ const TitleWithSelector = ({
           ...(focused ? styles.selectFocus : {}),
         }}
       >
-        {options.map((opt) => (
-          <option key={opt[displayKey]} value={opt[displayKey]}>
-            {opt[displayKey]}
-          </option>
-        ))}
+        <div style={{ width: "100px" }}>
+          {options.map((opt) => (
+            <option key={opt[displayKey]} value={opt[displayKey]}>
+              {opt[displayKey]}
+            </option>
+          ))}
+        </div>
       </select>
     </div>
   );

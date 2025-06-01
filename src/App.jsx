@@ -6,7 +6,10 @@ import TitleWithSelector from "./components/selector/selector-with-title";
 import LabeledTextInput from "./components/labeled-text/label-text-input";
 import TrimSheet from "./components/trim-sheet/trim-sheet";
 import RadioButtonGroup from "./components/radio-button";
-import { convertLtoGas, createTrimSheetData } from "./utils/create-trim-sheet-data";
+import {
+  convertLtoGas,
+  createTrimSheetData,
+} from "./utils/create-trim-sheet-data";
 
 function App() {
   const [pressures, setPressures] = useState([]);
@@ -103,7 +106,7 @@ function App() {
     <>
       <div
         style={{
-          background: "#d7a0ce",
+          background: "white",
           maxWidth: "100%",
           width: "100%",
         }}
@@ -172,9 +175,16 @@ function App() {
         )}
         <button
           onClick={() => window.location.reload()}
-          style={{ margin: "10px" }}
+          style={{
+            margin: "10px",
+            borderRadius: "10px",
+            color: "white",
+            fontSize: "24px",
+            // fontWeight: "bold",
+            background: "linear-gradient(to right, #007bff, #00b4db)",
+          }}
         >
-          🔄 Reload App
+          Reload
         </button>
       </div>
     </>

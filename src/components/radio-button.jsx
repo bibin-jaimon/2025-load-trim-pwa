@@ -2,8 +2,7 @@ import React from "react";
 
 const styles = {
   container: (maxWidth, minWidth) => ({
-    maxWidth: maxWidth || "600px",
-    minWidth: minWidth || "320px",
+    width: "100%",
     margin: "40px auto",
     textAlign: "center",
     fontFamily: "'Inter', sans-serif",
@@ -27,7 +26,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     padding: "14px 28px",
-    fontSize: "16px",
+    fontSize: "24px",
     border: "2px solid #cbd5e1",
     borderRadius: "12px",
     background: "#f0f4f8",

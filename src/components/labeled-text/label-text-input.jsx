@@ -7,7 +7,6 @@ const styles = {
     justifyContent: "space-between",
     padding: "16px",
     gap: "16px",
-    maxWidth: maxWidth || "600px",
     width: "100%",
     margin: "0 auto",
     backgroundColor: "#f9fafb",
@@ -25,7 +24,7 @@ const styles = {
   },
   input: {
     flex: 1,
-    maxWidth: "300px",
+    width: "100px",
     fontSize: "16px",
     padding: "10px 12px",
     borderRadius: "8px",
