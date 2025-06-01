@@ -1,40 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 
 const styles = {
-  container: {
-    maxWidth: "500px",
+  container: (maxWidth, minWidth) => ({
+    maxWidth: maxWidth || "600px",
+    minWidth: minWidth || "320px",
     margin: "40px auto",
     textAlign: "center",
-    fontFamily: "sans-serif",
-  },
+    fontFamily: "'Inter', sans-serif",
+    padding: "0 16px",
+    boxSizing: "border-box",
+  }),
   title: {
-    fontSize: "28px",
-    marginBottom: "20px",
-    color: "#333",
+    fontSize: "26px",
+    marginBottom: "24px",
+    color: "#0b2b5e", // deep aviation blue
+    fontWeight: "600",
   },
   optionsWrapper: {
     display: "flex",
     justifyContent: "center",
-    gap: "20px",
     flexWrap: "wrap",
+    gap: "16px",
   },
   option: {
-    position: "relative",
     display: "flex",
     alignItems: "center",
-    padding: "12px 24px",
-    fontSize: "18px",
-    border: "2px solid #ccc",
-    borderRadius: "10px",
-    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
+    padding: "14px 28px",
+    fontSize: "16px",
+    border: "2px solid #cbd5e1",
+    borderRadius: "12px",
+    background: "#f0f4f8",
+    color: "#0b2b5e",
     cursor: "pointer",
-    transition: "all 0.3s ease",
+    transition: "all 0.25s ease-in-out",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+    minWidth: "120px",
     userSelect: "none",
   },
   selected: {
-    backgroundColor: "#007bff",
+    background: "linear-gradient(to right, #007bff, #00b4db)",
     borderColor: "#007bff",
     color: "#fff",
+    boxShadow: "0 4px 12px rgba(0, 123, 255, 0.4)",
   },
   hiddenInput: {
     display: "none",
@@ -47,9 +55,11 @@ const RadioButtonGroup = ({
   onChange,
   label,
   name = "radio-group",
+  maxWidth,
+  minWidth,
 }) => {
   return (
-    <div style={styles.container}>
+    <div style={styles.container(maxWidth, minWidth)}>
       {label && <h2 style={styles.title}>{label}</h2>}
       <div style={styles.optionsWrapper}>
         {options.map((option) => {
@@ -60,6 +70,14 @@ const RadioButtonGroup = ({
               style={{
                 ...styles.option,
                 ...(isSelected ? styles.selected : {}),
+              }}
+              role="radio"
+              aria-checked={isSelected}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  onChange(option);
+                }
               }}
             >
               <input

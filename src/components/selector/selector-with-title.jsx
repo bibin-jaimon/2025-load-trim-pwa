@@ -1,30 +1,72 @@
 import React from "react";
 
-const TitleWithSelector = ({ title, options, displayKey, value, onChange }) => {
+const styles = {
+  container: (maxWidth) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px",
+    backgroundColor: "#f9fafb",
+    border: "1px solid #e2e8f0",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.03)",
+    fontFamily: "'Inter', sans-serif",
+    maxWidth: maxWidth || "600px",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+  }),
+  title: {
+    margin: 0,
+    fontSize: "18px",
+    fontWeight: 600,
+    color: "#1e293b",
+    flex: 1,
+  },
+  select: {
+    padding: "10px 14px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    border: "1px solid #cbd5e1",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    outline: "none",
+    transition: "border 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+    minWidth: "290px",
+    maxWidth: "300px",
+  },
+  selectFocus: {
+    border: "1px solid #3b82f6",
+    boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.3)",
+  },
+};
+
+const TitleWithSelector = ({
+  title,
+  options,
+  displayKey,
+  value,
+  onChange,
+  maxWidth, // optional: customize max width
+}) => {
+  const [focused, setFocused] = React.useState(false);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "space-between",
-        padding: "8px 16px",
-        background: "#d7a0ce",
-      }}
-    >
-      <h2 style={{ margin: 0, flex: 1, color: "black" }}>{title}</h2>
+    <div style={styles.container(maxWidth)}>
+      <h2 style={styles.title}>{title}</h2>
       <select
         value={value}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         onChange={(e) => {
-          let selectedItem = options.filter(
-            (item) => item[displayKey] == e.target.value
+          const selectedItem = options.find(
+            (item) => item[displayKey] === e.target.value
           );
-          if (selectedItem.length == 0) {
-            return {};
-          }
-
-          onChange(selectedItem[0]);
+          if (selectedItem) onChange(selectedItem);
         }}
-        style={{ padding: "4px 8px", backgroundColor: "white", color: "black" }}
+        style={{
+          ...styles.select,
+          ...(focused ? styles.selectFocus : {}),
+        }}
       >
         {options.map((opt) => (
           <option key={opt[displayKey]} value={opt[displayKey]}>
