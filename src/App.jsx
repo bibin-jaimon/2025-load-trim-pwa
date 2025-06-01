@@ -148,11 +148,6 @@ function App() {
             onChange={setSelectedPressure}
           />
         )}
-        {renderFuelTextField({
-          label: `Fuel (L)`,
-          value: fuel,
-          onChange: setFuel,
-        })}
         {canShow && (
           <TitleWithSelector
             title="Type"
@@ -172,6 +167,11 @@ function App() {
           />
         )}
         {renderFuelTextField({
+          label: `Fuel (L)`,
+          value: fuel,
+          onChange: setFuel,
+        })}
+        {/* {renderFuelTextField({
           label: "Pilot",
           value: pilotWeight,
           onChange: setPilotWeight,
@@ -181,7 +181,7 @@ function App() {
             label: "Co-Pilot",
             value: coPilotWeight,
             onChange: setCoPilotWeight,
-          })}
+          })} */}
 
         {/* <h1
           style={{
