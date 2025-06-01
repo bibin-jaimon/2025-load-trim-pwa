@@ -125,13 +125,18 @@ function App() {
         {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
         {canShow && (
           <TitleWithSelector
-            title="Pressure"
+            title={`Pressure (${selectedPressure.value})`}
             displayKey="key"
             options={pressures}
             value={selectedPressure?.key}
             onChange={setSelectedPressure}
           />
         )}
+        {renderFuelTextField({
+          label: `Fuel (L)`,
+          value: fuel,
+          onChange: setFuel,
+        })}
         {canShow && (
           <TitleWithSelector
             title="Type"
@@ -151,11 +156,6 @@ function App() {
           />
         )}
         {renderFuelTextField({
-          label: "Fuel (L)",
-          value: fuel,
-          onChange: setFuel,
-        })}
-        {renderFuelTextField({
           label: "Pilot",
           value: pilotWeight,
           onChange: setPilotWeight,
@@ -167,7 +167,7 @@ function App() {
             onChange: setCoPilotWeight,
           })}
 
-        <h1
+        {/* <h1
           style={{
             background: "linear-gradient(to right, #007bff, #00b4db)",
           }}
@@ -181,7 +181,7 @@ function App() {
             pressure={selectedPressure}
             fuel={`${convertLtoGas(fuel)}`}
           />
-        )}
+        )} */}
         <button
           onClick={() => window.location.reload()}
           style={{

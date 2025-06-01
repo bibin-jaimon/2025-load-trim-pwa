@@ -26,7 +26,7 @@ const TrimSheet = ({ data }) => {
                 style={{
                   border: "1px solid #ccc",
                   backgroundColor: "#e0e0e0",
-                  textAlign: "left",
+                  textAlign: "center",
                   padding: "10px",
                   fontWeight: "bold",
                   fontSize: "14px",
@@ -44,6 +44,7 @@ const TrimSheet = ({ data }) => {
               key={rowIndex}
               style={{
                 backgroundColor: rowIndex % 2 === 0 ? "#fff" : "#f9f9f9",
+                textAlign: "center",
               }}
             >
               {columns.map((col) => (
@@ -63,7 +64,15 @@ const TrimSheet = ({ data }) => {
           ))}
         </tbody>
       </table>
-      <h1>CG: {data.cg}</h1>
+      <div
+        style={{
+          justifyContent: "center",
+          width: "100%",
+          margin: "10px",
+        }}
+      >
+        <h1>CG: {data.cg}</h1>
+      </div>
     </div>
   );
 };
