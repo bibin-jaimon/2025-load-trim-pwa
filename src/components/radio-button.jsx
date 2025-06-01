@@ -3,7 +3,7 @@ import React from "react";
 const styles = {
   container: (maxWidth, minWidth) => ({
     width: "100%",
-    margin: "40px auto",
+    margin: "10px auto",
     textAlign: "center",
     fontFamily: "'Inter', sans-serif",
     padding: "0 16px",
@@ -25,23 +25,23 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "14px 28px",
-    fontSize: "24px",
-    border: "2px solid #cbd5e1",
+    padding: "10px 12px",
+    fontSize: "18px",
+    // border: "2px solid #cbd5e1",
     borderRadius: "12px",
-    background: "#f0f4f8",
+    // background: "#f0f4f8",
     color: "#0b2b5e",
     cursor: "pointer",
     transition: "all 0.25s ease-in-out",
     boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
-    minWidth: "120px",
+    minWidth: "80px",
     userSelect: "none",
   },
   selected: {
-    background: "linear-gradient(to right, #007bff, #00b4db)",
-    borderColor: "#007bff",
-    color: "#fff",
-    boxShadow: "0 4px 12px rgba(0, 123, 255, 0.4)",
+    // background: "linear-gradient(to right, #007bff, #00b4db)",
+    // borderColor: "#007bff",
+    // color: "#fff",
+    // boxShadow: "0 4px 12px rgba(0, 123, 255, 0.4)",
   },
   hiddenInput: {
     display: "none",
@@ -85,7 +85,7 @@ const RadioButtonGroup = ({
                 value={option}
                 checked={isSelected}
                 onChange={() => onChange(option)}
-                style={styles.hiddenInput}
+                // style={styles.hiddenInput}
               />
               <span>{option}</span>
             </label>

@@ -112,13 +112,16 @@ function App() {
         }}
         className="app-container"
       >
-        <h1>Load And Trim</h1>
+        <h1
+          style={{ background: "linear-gradient(to right, #007bff, #00b4db)" }}
+        >
+          LOAD AND TRIM SHEET
+        </h1>
         <RadioButtonGroup
           options={["Solo", "Dual"]}
           value={mode}
           onChange={setMode}
         />
-        <h1>Trim Sheet</h1>
         {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
         {canShow && (
           <TitleWithSelector
@@ -164,7 +167,13 @@ function App() {
             onChange: setCoPilotWeight,
           })}
 
-        <h1>Reference Table</h1>
+        <h1
+          style={{
+            background: "linear-gradient(to right, #007bff, #00b4db)",
+          }}
+        >
+          Reference Table
+        </h1>
         {canShow && (
           <ReferenceTable
             aircraft={selectedAircraft}
@@ -177,6 +186,7 @@ function App() {
           onClick={() => window.location.reload()}
           style={{
             margin: "10px",
+            marginBottom: "30px",
             borderRadius: "10px",
             color: "white",
             fontSize: "24px",
