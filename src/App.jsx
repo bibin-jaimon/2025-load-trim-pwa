@@ -114,7 +114,10 @@ function App() {
         className="app-container"
       >
         <h1
-          style={{ background: "linear-gradient(to right, #007bff, #00b4db)" }}
+          style={{
+            color: "white",
+            background: "linear-gradient(to right, #007bff, #00b4db)",
+          }}
         >
           LOAD AND TRIM SHEET
         </h1>
@@ -124,6 +127,18 @@ function App() {
           onChange={setMode}
         />
         {canShow && trimSheetData && <TrimSheet data={trimSheetData} />}
+        {trimSheetData && (
+          <div
+            style={{
+              justifyContent: "center",
+              alignContent: "flex-start",
+              width: "100%",
+              margin: "0 auto",
+            }}
+          >
+            <h1>CG: {trimSheetData.cg}</h1>
+          </div>
+        )}
         {canShow && (
           <TitleWithSelector
             title={`Pressure (${selectedPressure.value})`}

@@ -64,15 +64,6 @@ const TrimSheet = ({ data }) => {
           ))}
         </tbody>
       </table>
-      <div
-        style={{
-          justifyContent: "center",
-          width: "100%",
-          margin: "10px",
-        }}
-      >
-        <h1>CG: {data.cg}</h1>
-      </div>
     </div>
   );
 };

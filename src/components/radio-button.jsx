@@ -38,9 +38,9 @@ const styles = {
     userSelect: "none",
   },
   selected: {
-    // background: "linear-gradient(to right, #007bff, #00b4db)",
-    // borderColor: "#007bff",
-    // color: "#fff",
+    background: "linear-gradient(to right, #007bff, #00b4db)",
+    borderColor: "#007bff",
+    color: "#fff",
     // boxShadow: "0 4px 12px rgba(0, 123, 255, 0.4)",
   },
   hiddenInput: {
@@ -85,7 +85,7 @@ const RadioButtonGroup = ({
                 value={option}
                 checked={isSelected}
                 onChange={() => onChange(option)}
-                // style={styles.hiddenInput}
+                style={styles.hiddenInput}
               />
               <span>{option}</span>
             </label>
