@@ -40,7 +40,7 @@ const styles = {
 
 const TitleWithSelector = ({
   title,
-  options,
+  options = [],
   displayKey,
   value,
   onChange,
@@ -66,13 +66,11 @@ const TitleWithSelector = ({
           ...(focused ? styles.selectFocus : {}),
         }}
       >
-        <div style={{ width: "100px" }}>
-          {options.map((opt) => (
-            <option key={opt[displayKey]} value={opt[displayKey]}>
-              {opt[displayKey]}
-            </option>
-          ))}
-        </div>
+        {options.map((opt) => (
+          <option key={opt[displayKey]} value={opt[displayKey]}>
+            {opt[displayKey]}
+          </option>
+        ))}
       </select>
     </div>
   );

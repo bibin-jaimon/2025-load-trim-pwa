@@ -62,7 +62,6 @@ function App() {
 
   // set initial pressure
   useEffect(() => {
-    console.log(pressures);
     setSelectedPressure(pressures?.[0]);
   }, [pressures]);
 
@@ -89,6 +88,8 @@ function App() {
   }, [selectedAircraft]);
 
   const canShow =
+    pressures.length != 0 &&
+    aircrafts.length != 0 &&
     selectedPressure != undefined &&
     selectedAircraft != undefined &&
     selectedVariant != undefined;

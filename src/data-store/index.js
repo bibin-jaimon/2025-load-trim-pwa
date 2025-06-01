@@ -4,12 +4,62 @@ const loadJSONModules = async (modules) => {
 };
 
 export const loadAircrafts = async () => {
+  return [
+    {
+      type: "Cessna 152",
+      regns: [
+        {
+          acreg: "VT-SHA",
+          bew: 539.86,
+          arm: 30.21,
+          mtow: 758.18,
+          mlw: 758.18,
+        },
+        {
+          acreg: "VT-SHC",
+          bew: 543.33,
+          arm: 30.21,
+          mtow: 758.18,
+          mlw: 758.18,
+        },
+      ],
+    },
+  ];
+
   const modules = import.meta.glob("./aircrafts/*.json");
   let data = await loadJSONModules(modules);
 
   return mapped(data);
 };
 export const loadPressures = async () => {
+  return [
+    { key: "Q-1000", value: 1359 },
+    { key: "Q-1001", value: 1332 },
+    { key: "Q-1002", value: 1305 },
+    { key: "Q-1003", value: 1278 },
+    { key: "Q-1004", value: 1251 },
+
+    { key: "Q-1005", value: 1224 },
+    { key: "Q-1006", value: 1197 },
+    { key: "Q-1007", value: 1170 },
+    { key: "Q-1008", value: 1143 },
+
+    { key: "Q-1009", value: 1116 },
+    { key: "Q-1010", value: 1089 },
+    { key: "Q-1011", value: 1062 },
+    { key: "Q-1012", value: 1035 },
+
+    { key: "Q-1013", value: 1008 },
+    { key: "Q-1014", value: 981 },
+    { key: "Q-1015", value: 954 },
+    { key: "Q-1016", value: 927 },
+
+    { key: "Q-1017", value: 900 },
+    { key: "Q-1018", value: 873 },
+    { key: "Q-1019", value: 846 },
+    { key: "Q-1020", value: 819 },
+  ];
+
   const modules = import.meta.glob("./pressure/pressure.json");
   let data = await loadJSONModules(modules);
   return mapped(data)[0].data;
