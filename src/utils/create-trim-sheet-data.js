@@ -42,12 +42,20 @@ const createTrimSheetData = ({
     });
   }
 
-  const engineStartAndTaxiFuel = {
-    no: 8,
-    itemDescription: "Engine Start and Taxi Fuel",
-    arm: 40,
-    weight: 2.16,
-    moment: (Number(40) * Number(2.16)).toFixed(2),
+  const baggageArea1 = {
+    no: 5,
+    itemDescription: "Baggage Area 1",
+    arm: 64,
+    weight: "-",
+    moment: "-",
+  };
+
+  const baggageArea2 = {
+    no: 6,
+    itemDescription: "Baggage Area 2",
+    arm: 84,
+    weight: "-",
+    moment: "-",
   };
 
   const totalWeight = initialRows.reduce(
@@ -65,6 +73,14 @@ const createTrimSheetData = ({
     arm: "", //rampArm.toFixed(2),
     weight: totalWeight.toFixed(2),
     moment: totalMoment.toFixed(2),
+  };
+
+  const engineStartAndTaxiFuel = {
+    no: 8,
+    itemDescription: "Engine Start and Taxi Fuel",
+    arm: 40,
+    weight: 2.16,
+    moment: (Number(40) * Number(2.16)).toFixed(2),
   };
 
   const totalWeightAndMoment = {
@@ -89,6 +105,8 @@ const createTrimSheetData = ({
     ],
     rows: [
       ...initialRows,
+      baggageArea1,
+      baggageArea2,
       rampWeightRow,
       engineStartAndTaxiFuel,
       totalWeightAndMoment,
